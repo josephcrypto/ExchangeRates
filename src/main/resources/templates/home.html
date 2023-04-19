@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Joseph Money Exchange</title>
+    <link rel="stylesheet" href="/css/style2.css">
+    <link rel="icon" type="image/png" href="/images/JLogo-1.png">
+</head>
+<body>
+<header>
+    <nav>
+        <div class="logo">
+                <img th:src="@{images/JLogo-1.png}" class="rounded float-start" width="50"  height="50" alt="logo">
+                <h2>Net_Solution</h2>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="">Home</a></li>
+            <li><a href="/customer/list">Customers</a></li>
+            <li><a href="/exchange-rates/list">Rates</a></li>
+            <li><a href="">About Us</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="#">Service</a></li>
+        </ul>
+    </nav>
+    <div class="hero-section">
+        <h1>Get the Best Exchange Rates</h1>
+        <p>Exchange your currency with us and get the best rates in the market.</p>
+        <a href="#" class="btn">Exchange Now</a>
+    </div>
+</header>
+
+<section class="exchange-rates">
+    <h2>Exchange Rates</h2>
+    <p>Check out our latest exchange rates:</p>
+    <table>
+        <thead>
+        <tr>
+            <th>Currency</th>
+            <th>Buy</th>
+            <th>Sell</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>USD</td>
+            <td>1.25</td>
+            <td>1.20</td>
+        </tr>
+        <tr>
+            <td>THB</td>
+            <td>1.45</td>
+            <td>1.40</td>
+        </tr>
+        <tr>
+            <td>YUAN</td>
+            <td>1.65</td>
+            <td>1.60</td>
+        </tr>
+        <tr>
+            <td>YEN</td>
+            <td>15.69</td>
+            <td>17.60</td>
+        </tr>
+        </tbody>
+    </table>
+<!--    <a href="#" class="btn">View All Rates</a>-->
+</section>
+
+<section class="about-us">
+    <h2>About Us</h2>
+    <p>We are a leading provider of currency exchange services, serving customers all over the city.</p>
+    <p>Our mission is to provide fast, reliable, and secure currency exchange services at the best rates in the market.</p>
+</section>
+
+<footer>
+    <p>&copy; 2023 Net Solution. All rights reserved.</p>
+</footer>
+</body>
+</html>

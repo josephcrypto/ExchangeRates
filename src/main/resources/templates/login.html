@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/png" th:href="net_solution_logo.png">
+</head>
+
+<style>
+    #message
+    {
+        color: #1639ee;
+        width: 100%;
+        text-align: center;
+    }
+    #form
+    {
+        margin: 5vh auto;
+    }
+</style>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script>
+    function sendajax()
+    {
+        var formdatas = $("#form input, #form select").serializeArray();
+
+        var data = {};
+        $( formdatas ).each(function(index, obj){
+            data[obj.name] = obj.value;
+        });
+
+        console.log(data);
+
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: '/api/validatelogin',
+            contentType: "application/json",
+            data:JSON.stringify(data),
+            success: function (json) {
+                console.log(json);
+                $("#message").html(json.message);
+                if(json.code=="1") {
+                    window.location = "/customer/list";
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log('request failed: ' + textStatus);
+                $("#message").html('request failed: ' + textStatus);
+            }
+        });
+
+    }
+
+    $(function(){
+        $('#login').click(function() {
+            sendajax();
+        });
+    });
+</script>
+<body>
+<div class="container">
+
+    <div class="logo">
+        <img th:src="@{images/JLogo-1.png}" class="rounded float-start" width="50"  height="128" alt="logo">
+    </div>
+    <section id="form">
+    <h3 id="message">Net_Solution App</h3>
+    <form>
+        <label for="username"><b>Username:</b></label>
+        <input type="text" class="form-control" id="username" placeholder="Enter Username" name="username" autofocus>
+
+        <label for="password"><b>Password:</b></label>
+        <input type="password" class="form-control" id="password" placeholder="Enter Password" name="password" autofocus>
+
+        <button id="login" class="btn btn-primary" type="submit">Login</button>
+    </form>
+    </section>
+<!--    <div class="forgot_password">-->
+<!--        <span>Forgot <a href="#">password?</a></span>-->
+<!--    </div>-->
+</div>
+</body>
+</html>

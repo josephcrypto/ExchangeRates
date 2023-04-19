@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <title>Customer List</title>
+</head>
+<div>
+    <header>
+<!--        <nav class = "navbar navbar-expand-md navbar-dark bg-dark">-->
+<!--            <div>-->
+<!--                <a href = "https://myiphonex64g23.wixsite.com/website" class = "navbar-brand">-->
+<!--                    <img th:src="@{images/Pentagram.png}" class="rounded float-start" width="50"  height="50" alt="logo">-->
+<!--                    JOSEPH APP-->
+<!--                </a>-->
+<!--            </div>-->
+<!--            <ul class="navbar-nav">-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span> </a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="">Service</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="">Project</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="https://onesixfourlucifer.wixsite.com/onesixfour666">Blog</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="https://josephcrypto.github.io/">About</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="/contact">Contact</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--&lt;!&ndash;            <form class="form-check-inline justify-content-sm-center" style="text-align: left;">&ndash;&gt;-->
+<!--&lt;!&ndash;                <input type="search" class="form-control" placeholder="Search" id="fieldKeyword"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <button class="btn btn-info m-1" type="submit" id="buttonSearch">Search</button>&ndash;&gt;-->
+<!--&lt;!&ndash;            </form>&ndash;&gt;-->
+<!--        </nav>-->
+    </header>
+</div>
+<style>
+    .footer {
+        position: absolute;
+        font-size: small;
+        bottom: 0;
+        width:100%;
+        height: 40px;
+        background-color: #2d2d2d;
+        text-align: center;
+        color: white;
+    }
+</style>
+
+<body>
+<div class="container-fluid text-center">
+        <div><h2>Management Customer Lists</h2></div>
+
+    <div class="m-10 text-right">
+        <form th:action="@{/logout}" method="post">
+
+            <input type="submit" value="Logout" />
+        </form>
+    </div>
+    <div class="m-10 text-left">
+        <a class="btn btn-primary btn-sm mb-2" th:href="@{/customer/new}"> Add Customer</a>
+
+        <a class="btn btn-outline-info btn-sm mb-2" th:href="@{/exchange-rates/list}"> Exchange Rate</a>
+      </div>
+
+    <div class="m-10 text-right">
+        <a class="btn btn-info btn-sm mb-2" th:href="@{/customer/export-to-pdf}"> Export PDF</a>
+    </div>
+
+<!--    <div th:if="${message}" class="alert alert-success text-center">-->
+<!--        [[${message}]]-->
+<!--    </div>-->
+
+    <div>
+        <table class="table table-bordered table-striped table-bordered" style="width: auto">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>PhoneNo</th>
+                <th>Amount</th>
+                <th>Rate</th>
+                <th>CashOut</th>
+                <th>CashIn</th>
+                <th>Deposit</th>
+                <th>Withdraw</th>
+                <th>KBZPay</th>
+                <th>WaveMoney</th>
+                <th>TopUp</th>
+                <th>MobileBanking</th>
+                <th>Transfer</th>
+                <th>VISACard</th>
+                <th>Loan</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="customer : ${listCustomers}">
+                <tr>
+                    <td>[[${customer.cid}]]</td>
+                    <td>[[${customer.customerName}]]</td>
+                    <td>[[${customer.phoneNo}]]</td>
+                    <td>[[${customer.exchangeAmount}]]</td>
+                    <td>[[${customer.rate}]]</td>
+                    <td>[[${customer.cashOut}]]</td>
+                    <td>[[${customer.cashIn}]]</td>
+                    <td>[[${customer.deposit}]]</td>
+                    <td>[[${customer.withdraw}]]</td>
+                    <td>[[${customer.kbzPay}]]</td>
+                    <td>[[${customer.waveMoney}]]</td>
+                    <td>[[${customer.topUp}]]</td>
+                    <td>[[${customer.mobileBanking}]]</td>
+                    <td>[[${customer.accountTransfer}]]</td>
+                    <td>[[${customer.visaCard}]]</td>
+                    <td>[[${customer.loan}]]</td>
+                    <td>[[${customer.date}]]</td>
+                    <td>[[${customer.description}]]</td>
+                    <td>
+                        <a class="btn btn-primary h3 m-3" th:href="@{'/customer/edit/' + ${customer.cid}}">Edit</a>
+                        <a class="btn btn-danger h3 m-3" th:href="@{'/customer/delete/' + ${customer.cid}}">Delete</a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<!--<div>-->
+<!--    <footer class="footer">-->
+<!--        <span class="text-muted">All Rights Reserved 2022 &nbsp; @Joseph Crypto</span>-->
+<!--    </footer>-->
+<!--</div>-->
+</body>
+
+<script type="text/javascript">
+    $(document).ready(new function (){
+        $('#buttonSearch').on('click', function (e){
+            Keyword = $('#fieldKeyword').val();
+            alert('Keyword: ' + keyword);
+        });
+    });
+</script>
+
+</html>

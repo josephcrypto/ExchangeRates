@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Exchange Rates</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css"/>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet"
+        crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"/>
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+<!--  <link rel="stylesheet" th:href="@{/css/style5.css}">-->
+</head>
+<body>
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="#">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active">List</li>
+    </ol>
+
+    <div class="container-fluid text-center">
+      <div class="m-2 text-left">
+        <a class="btn btn-outline-info h2 m-2 btn-sm mb-2" th:href="@{/exchange-rates/new}">Add Rate</a>
+        <a class="btn btn-outline-success h2 m-2 btn-sm mb-2" th:href="@{/exchange-rates/export-to-pdf}">Export PDF</a>
+
+        <a class="btn btn-outline-secondary h2 m-2 btn-sm mb-2" th:href="@{/customer/list}">Customer List</a>
+        <a class="btn btn-outline-info h2 m-2 btn-sm mb-2" th:href="@{/customer/new}">Add Customer</a>
+      </div>
+
+      <div class="m-10 text-right">
+        <form th:action="@{/logout}" method="post">
+
+          <input type="submit" value="Logout" />
+        </form>
+      </div>
+      <hr>
+      <div th:if="${message}" class="alert alert-success text-center col-sm-4">
+        ExchangeRate is Updated.
+      </div>
+
+      <div>
+        <table class="table table-bordered table-striped table-responsive-md">
+          <thead class="thead-light">
+          <tr>
+            <th>ID</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Rate</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <th:block th:each="rate : ${rateList}">
+            <tr>
+              <td th:text="${rate.getId()}">ID</td>
+              <td th:text="${rate.getCurrencyFrom}">From</td>
+              <td th:text="${rate.getCurrencyTo}">To</td>
+              <td th:text="${rate.getRate}">Rate</td>
+              <td th:text="${rate.getDateTime()}">DateTime</td>
+
+              <td>
+                <a class="btn btn-primary h3 m-3" th:href="@{'/exchange-rates/edit/' + ${rate.id}}">Edit</a>
+                <a class="btn btn-danger h3 m-3" th:href="@{'/exchange-rates/delete/' + ${rate.id}}">Delete</a>
+              </td>
+            </tr>
+          </th:block>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+<!--    <footer class="sticky-footer">-->
+<!--      <div class="container">-->
+<!--        <div class="text-center">-->
+<!--          <small>Power By Bootstrap Copyright © Joseph Crypto 2022</small>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </footer>-->
+
+  </div>
+</div>
+</body>
+</html>
+
+
+
+
