@@ -19,7 +19,7 @@ public class LoginController {
     @PostMapping("/logout")
     public String logout(HttpServletRequest request) {
         request.getSession().removeAttribute("username");
-        return "redirect:/login";
+        return "redirect:/home";
     }
 
 
